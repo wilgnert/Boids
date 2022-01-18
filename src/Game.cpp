@@ -76,13 +76,17 @@ void Game::initRuntimeVariables() {
 void Game::initShaders() {
     this->shaders.push_back(new Shader(this->GL_VERSION_MAJOR, this->GL_VERSION_MINOR, "C:\\Users\\absit\\Documents\\CG\\Boids\\src\\shaders\\vertex\\core.glsl", "C:\\Users\\absit\\Documents\\CG\\Boids\\src\\shaders\\fragment\\core.glsl"));
 }
-void Game::initTextures() {    
+void Game::initTextures() {
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     this->textures.push_back(new Texture("C:\\Users\\absit\\Documents\\CG\\Boids\\images\\amongus.png", "texture_diffuse"));
     this->textures.push_back(new Texture("C:\\Users\\absit\\Documents\\CG\\Boids\\images\\amongus.png", "texture_specular"));
     this->textures.push_back(new Texture("C:\\Users\\absit\\Documents\\CG\\Boids\\images\\spdrmn.png", "texture_diffuse"));
     this->textures.push_back(new Texture("C:\\Users\\absit\\Documents\\CG\\Boids\\images\\spdrmn.png", "texture_specular"));
     this->textures.push_back(new Texture("C:\\Users\\absit\\Documents\\CG\\Boids\\fish\\fish_texture.png", "texture_diffuse"));
     this->textures.push_back(new Texture("C:\\Users\\absit\\Documents\\CG\\Boids\\fish\\fish_texture.png", "texture_specular"));
+    this->textures.push_back(new Texture("C:\\Users\\absit\\Documents\\CG\\Boids\\fish\\ground.png", "texture_diffuse"));
+    this->textures.push_back(new Texture("C:\\Users\\absit\\Documents\\CG\\Boids\\fish\\ground.png", "texture_specular"));    
 }
 void Game::initMaterials() {
     this->materials.push_back(new Material(
@@ -96,30 +100,13 @@ void Game::initLights() {
     this->lights.push_back(new glm::vec3(1.f));
 }
 void Game::initModels() {
-    Cube cube;
-    std::vector<Texture> texts;
-    texts.push_back(*(this->textures[Textures::AMONGUS_DIFFUSE]));
-    texts.push_back(*(this->textures[Textures::AMONGUS_SPECULAR]));
-    this->meshes.push_back(
-        new Mesh(
-            cube.getVertices(),
-            cube.getIndices(),
-            std::vector<Texture>()
-        )
-    );
-    texts.clear();
     this->models.push_back(new Model(
-        glm::vec3(0.f),
+        glm::fvec3(0.f, 0.f, 0.f),
         this->materials[Materials::MAT_1],
-        this->meshes,
-        this->textures[Textures::AMONGUS_DIFFUSE],
-        this->textures[Textures::AMONGUS_SPECULAR]
-        )
+        "fish/2d_plane.obj",
+        this->textures[Textures::GROUND_D],
+        this->textures[Textures::GROUND_S])
     );
-
-    this->meshes.clear();
-    
-    
     this->models.push_back(new Model(
         glm::fvec3(0.f, 0.f, 0.f),
         this->materials[Materials::MAT_1],
@@ -127,6 +114,7 @@ void Game::initModels() {
         this->textures[Textures::FISH_DIFFUSE],
         this->textures[Textures::FISH_SPECULAR])
     );
+    this->models[1]->move(glm::vec3(0.f, 1.f, 0.f));
 }
 void Game::initUniforms() {
     this->shaders[ShaderPrograms::CORE]->setMat4("view_matrix", this->view_matrix, GL_FALSE);
@@ -287,7 +275,7 @@ void Game::update() {
     updateMatrices();
     updateUniforms();
     updateModels();
-    this->models[0]->circularMotion(1.39);
+    // this->models[0]->circularMotion(1.39);
 }
 void Game::render() {
     // START DRAW

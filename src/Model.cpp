@@ -184,7 +184,6 @@ Model::Model(
     loadModel(obj_file_path);
     
     for (auto& i : this->meshes) {
-        i.scale(glm::vec3(-0.9f));
         i.setPosition(this->position);
         i.setOrigin(this->position);
     }

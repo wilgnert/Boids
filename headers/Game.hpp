@@ -15,7 +15,9 @@ enum Textures
     MIRANHA_DIFFUSE, 
     MIRANHA_SPECULAR, 
     FISH_DIFFUSE,
-    FISH_SPECULAR
+    FISH_SPECULAR,
+    GROUND_D,
+    GROUND_S
 };
 enum Materials
 {
