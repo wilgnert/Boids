@@ -1,0 +1,36 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe arquivo de build ativo",
+            "command": "g++.exe",
+            "args": [
+                "C:\\Users\\absit\\Documents\\CG\\Boids\\src\\glad.c",
+                "C:\\Users\\absit\\Documents\\CG\\Boids\\src\\Game.cpp",
+                "C:\\Users\\absit\\Documents\\CG\\Boids\\src\\Material.cpp",
+                "C:\\Users\\absit\\Documents\\CG\\Boids\\src\\shader.cpp",
+                "C:\\Users\\absit\\Documents\\CG\\Boids\\src\\Texture.cpp",
+                "-lglfw3",
+                "-lgdi32",
+                "-llibsoil2",
+                "-fdiagnostics-color=always",
+                "-g",
+                "C:\\Users\\absit\\Documents\\CG\\Boids\\src\\main.cpp",
+                "-o",
+                "C:\\Users\\absit\\Documents\\CG\\Boids\\app.exe"
+            ],
+            "options": {
+                "cwd": "C:/MinGW/mingw64/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Tarefa gerada pelo Depurador."
+        }
+    ],
+    "version": "2.0.0"
+}
